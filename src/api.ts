@@ -10,3 +10,5 @@ async function fetchProtectedData() {
     throw error;
   }
 }
+
+
