@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { register } from "./auth";
 
 type Props = {};
 
@@ -9,6 +10,7 @@ const Register = (props: Props) => {
   const [confirmpassword, setConfirmPassword] = useState("");
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    register(email, password, confirmpassword, "Client");
   };
 
   return (
@@ -25,9 +27,9 @@ const Register = (props: Props) => {
           <span className="far fa-user"></span>
           <input
             type="text"
-            name="userName"
-            id="userName"
-            placeholder="Username"
+            name="email"
+            id="email"
+            placeholder="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
