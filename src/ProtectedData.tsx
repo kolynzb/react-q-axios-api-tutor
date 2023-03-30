@@ -1,23 +1,20 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import api from "./axios";
 type Props = {};
 
 const ProtectedData = (props: Props) => {
-  const { isLoading, data, error } = useQuery("protectedData", async () => {
-    const response = await api.get("/protected-data");
-
-    return response.data;
+  const jobsQuery = useQuery({
+    queryKey: ["jobs"], // unique idetifier for query
+    queryFn: () => api.get("/jobs_detail/"),
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (jobsQuery.isLoading) return <div>Loading...</div>;
 
-  if (error) {
-    return <div>Error: {(error as any).message}</div>;
-  }
+  console.log(jobsQuery.error);
+  if (jobsQuery.error) return <div>{(jobsQuery as any).error.message}</div>;
 
-  return <div>{data}</div>;
+  return <div>Data has loaded</div>;
+  // return <div>{(jobsQuery as any).data}</div>;
 };
 
 export default ProtectedData;

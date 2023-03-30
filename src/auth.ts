@@ -7,8 +7,16 @@ async function login(email: string, password: string) {
 
     const { access_token, refresh_token, user } = response.data;
 
-    Cookies.set("access_token", access_token, { httpOnly: true });
-    Cookies.set("refresh_token", refresh_token, { httpOnly: true });
+    Cookies.set("access_token", access_token);
+    Cookies.set("refresh_token", refresh_token);
+    // Cookies.set("access_token", access_token, { httpOnly: true });
+    // Cookies.set("refresh_token", refresh_token, { httpOnly: true });
+
+    console.log("Here you go");
+    console.log(access_token);
+    console.log(refresh_token);
+    console.log(Cookies.get("access_token"));
+    console.log(Cookies.get("refresh_token"));
 
     // Store the access token in local storage as well, in case you need to access it from a different tab or window
     localStorage.setItem("access_token", access_token);

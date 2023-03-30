@@ -27,17 +27,36 @@ api.interceptors.response.use(
 
       const refreshToken = Cookies.get("refresh_token");
 
-      const response = await axios.post("/api/auth/refresh-token", {
-        refresh_token: refreshToken,
-      });
+      // const response = await api.post("/accounts/refresh-token/", {
+      //   refresh_token: refreshToken,
+      // });
 
-      const newAccessToken = response.data.access_token;
+      // const newAccessToken = response.data.access_token;
 
-      Cookies.set("access_token", newAccessToken, { httpOnly: true });
+      // Cookies.set("access_token", newAccessToken, { httpOnly: true });
 
-      return api(originalRequest);
+      // return api(originalRequest);
+      try {
+        const response = await api.post("/accounts/refresh-token/", {
+          refresh: refreshToken,
+        });
+
+        const newAccessToken = response.data.access;
+
+        Cookies.set("access_token", newAccessToken, { httpOnly: true });
+
+        return api(originalRequest);
+      } catch (err) {
+        // handle refresh token error
+        console.log(err);
+      }
+    } else if (error.message === "Network Error") {
+      // handle network error
+      console.log("Network Error: ", error);
+    } else if (error.response && error.response.status >= 500) {
+      // handle server error
+      console.log("Server Error: ", error);
     }
-
     return Promise.reject(error);
   }
 );

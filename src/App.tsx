@@ -2,6 +2,7 @@ import Login from "./Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Register from "./Register";
+import ProtectedData from "./ProtectedData";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/jobs",
+    element: <ProtectedData />,
   },
 ]);
 function App() {

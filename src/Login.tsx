@@ -1,5 +1,5 @@
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
 import { useState } from "react";
 import { login } from "./auth";
@@ -12,9 +12,10 @@ const Login = (props: Props) => {
   // In your login and logout components, use the functions from auth.js to log in and log out the user:
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    redirect("/jobs");
     login(email, password);
   };
-  
+
   return (
     <div className="wrapper">
       <div className="logo">

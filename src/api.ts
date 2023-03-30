@@ -1,8 +1,8 @@
 import api from "./axios";
 
-async function fetchProtectedData() {
+async function getJobs() {
   try {
-    const response = await api.get("/protected-data");
+    const response = await api.get("/jobs");
 
     return response.data;
   } catch (error) {
@@ -10,5 +10,3 @@ async function fetchProtectedData() {
     throw error;
   }
 }
-
-
